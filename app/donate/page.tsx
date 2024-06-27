@@ -1,6 +1,7 @@
+import React from "react";
 import Image from "next/image";
 
-export default function Home() {
+const DonatePage = () => {
   return (
     <main>
       <h1>Donate Page</h1>
@@ -14,4 +15,6 @@ export default function Home() {
       />
     </main>
   );
-}
+};
+
+export default DonatePage;
