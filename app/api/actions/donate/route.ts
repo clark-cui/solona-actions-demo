@@ -14,11 +14,39 @@ import {
   Transaction,
 } from "@solana/web3.js";
 
-export const DEFAULT_SOL_ADDRESS: PublicKey = new PublicKey(
+const DEFAULT_SOL_ADDRESS: PublicKey = new PublicKey(
   "3EMXY6CBrQzQG2JSxiQfqbDkgHAavorhieb6ftELknqA" // clark wallet
 );
 
-export const DEFAULT_SOL_AMOUNT: number = 0.1;
+const DEFAULT_SOL_AMOUNT: number = 0.1;
+
+const validatedQueryParams = (requestUrl: URL) => {
+  let toPubkey: PublicKey = DEFAULT_SOL_ADDRESS;
+  let amount: number = DEFAULT_SOL_AMOUNT;
+
+  try {
+    if (requestUrl.searchParams.get("to")) {
+      toPubkey = new PublicKey(requestUrl.searchParams.get("to")!);
+    }
+  } catch (err) {
+    throw "Invalid input query parameter: to";
+  }
+
+  try {
+    if (requestUrl.searchParams.get("amount")) {
+      amount = parseFloat(requestUrl.searchParams.get("amount")!);
+    }
+
+    if (amount <= 0) throw "amount is too small";
+  } catch (err) {
+    throw "Invalid input query parameter: amount";
+  }
+
+  return {
+    amount,
+    toPubkey,
+  };
+};
 
 export const GET = async (req: Request) => {
   try {
@@ -150,31 +178,3 @@ export const POST = async (req: Request) => {
     });
   }
 };
-
-function validatedQueryParams(requestUrl: URL) {
-  let toPubkey: PublicKey = DEFAULT_SOL_ADDRESS;
-  let amount: number = DEFAULT_SOL_AMOUNT;
-
-  try {
-    if (requestUrl.searchParams.get("to")) {
-      toPubkey = new PublicKey(requestUrl.searchParams.get("to")!);
-    }
-  } catch (err) {
-    throw "Invalid input query parameter: to";
-  }
-
-  try {
-    if (requestUrl.searchParams.get("amount")) {
-      amount = parseFloat(requestUrl.searchParams.get("amount")!);
-    }
-
-    if (amount <= 0) throw "amount is too small";
-  } catch (err) {
-    throw "Invalid input query parameter: amount";
-  }
-
-  return {
-    amount,
-    toPubkey,
-  };
-}
