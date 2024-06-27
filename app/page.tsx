@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main>
-      <h1>Donate Page</h1>
+      <h1>Memo Page</h1>
       <Image
         src="/pic.png"
         alt="clark cui"
