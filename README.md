@@ -4,6 +4,12 @@ https://solona-actions-demo.vercel.app
 
 ## solana actions
 
+https://solona-actions-demo.vercel.app/api/actions/memo
+
+https://solona-actions-demo.vercel.app/api/actions/donate
+
+## dial.to
+
 https://www.dial.to/?action=solana-action:https://solona-actions-demo.vercel.app/api/actions/memo
 
 https://www.dial.to/?action=solana-action:https://solona-actions-demo.vercel.app/api/actions/donate
