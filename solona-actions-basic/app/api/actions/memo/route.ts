@@ -17,7 +17,7 @@ import {
 
 export const GET = (req: Request) => {
   const payload: ActionGetResponse = {
-    icon: new URL("/vercel.svg", new URL(req.url).origin).toString(),
+    icon: new URL("/pic.png", new URL(req.url).origin).toString(),
     label: "Send Memo",
     description: "Send a memo to a Solana address",
     title: "Memo Demo",
